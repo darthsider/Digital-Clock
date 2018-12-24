@@ -47,13 +47,13 @@ always @(count[16:14] or time_r) begin
 case(count[16:14])
 4'd0: seg_r <= time_r[3:0];
 4'd1: seg_r <= time_r[7:4];
-4'd2: seg_r <= 4'd8;
+4'd2: seg_r <= 4'ha;
 4'd3: seg_r <= time_r[11:8];
 4'd4: seg_r <= time_r[15:12];
-4'd5: seg_r <= 4'd8;
+4'd5: seg_r <= 4'ha;
 4'd6: seg_r <= time_r[19:16];
 4'd7: seg_r <= time_r[23:20];
-default: seg_r <= 4'd8;
+default: seg_r <= 4'hb;
 endcase
 end
 
@@ -62,13 +62,13 @@ always @(count[16:14]) begin
 case(count[16:14])
 4'd0: dig <= 8'b11111110;
 4'd1: dig <= 8'b11111101;
-4'd2: dig <= 8'b11111111;
+4'd2: dig <= 8'b11111011;
 4'd3: dig <= 8'b11110111;
 4'd4: dig <= 8'b11101111;
-4'd5: dig <= 8'b11111111;
+4'd5: dig <= 8'b11011111;
 4'd6: dig <= 8'b10111111;
 4'd7: dig <= 8'b01111111;
-default: dig <= 8'b11111110;
+default: dig <= 8'b11111110; 
 endcase
 end
 
@@ -86,7 +86,8 @@ case(seg_r)
 4'h6:seg <= 8'h7d;
 4'h7:seg <= 8'h07;
 4'h8:seg <= 8'h7f;
-4'h9:seg <= 8'h6f;	
+4'h9:seg <= 8'h6f;
+4'ha:seg <= 8'h80;	
 default:seg <= 8'h00;			
 endcase
 end
@@ -107,13 +108,13 @@ time_r[7:4] <= 0;
 time_r[11:8] <= time_r[11:8] + 1'b1;
 if(time_r[11:8] == 4'h9) begin
 time_r[11:8] <= 0;
-time_r[15:12] <= time_r + 1'b1;
+time_r[15:12] <= time_r[15:12] + 1'b1;
 if(time_r[15:12] == 4'h5) begin
 time_r[15:12] <= 0;
-time_r[19:16] <= time_r + 1'b1;
+time_r[19:16] <= time_r[19:16] + 1'b1;
 if(time_r[19:16] == 4'h9) begin
 time_r[19:16] <= 0;
-time_r[23:20] <= time_r + 1'b1;
+time_r[23:20] <= time_r[23:20] + 1'b1;
 if(time_r[23:16] == 8'h18) begin
 time_r[23:16] <= 0;
 end
